@@ -1,10 +1,7 @@
 package com.cwa.Todo_List.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,21 +22,34 @@ public class Todo {
     @Column(nullable = false, length = 200)
     private String title;
 
-    @Column(nullable = false, length = 200)
+    @Column(length = 1000)
     private String description;
+
+    @Column(nullable = false)
+    @Builder.Default
+    private Boolean completed = false;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @Builder.Default
+    private Priority priority = Priority.MEDIUM;
+
+    @Column(name = "due_date")
+    private LocalDateTime dueDate;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt ;
+    private LocalDateTime createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-
     public enum Priority {
         LOW, MEDIUM, HIGH, URGENT
     }
+
+
 
 
 
