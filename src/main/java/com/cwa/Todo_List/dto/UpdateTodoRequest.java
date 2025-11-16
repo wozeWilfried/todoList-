@@ -1,6 +1,8 @@
 package com.cwa.Todo_List.dto;
 
 import com.cwa.Todo_List.entities.Todo;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
