@@ -4,40 +4,35 @@ import com.cwa.Todo_List.dto.CreateTodoRequest;
 import com.cwa.Todo_List.dto.TodoDTO;
 import com.cwa.Todo_List.dto.UpdateTodoRequest;
 import com.cwa.Todo_List.entities.Todo;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
 
 /**
- * MapStruct mapper for converting between Todo entities and DTOs
- * Handles bidirectional conversion and partial updates
+ * Interface du mapper pour la conversion entre entités Todo et DTOs
+ * Implementation manuelle dans TodoMapperImpl
  */
-@Mapper(componentModel = "spring",
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface TodoMapper {
 
     /**
-     * Converts a Todo entity to TodoDTO
+     * Convertit une entité Todo en TodoDTO
      *
-     * @param todo The entity to convert
-     * @return The corresponding DTO
+     * @param todo L'entité à convertir
+     * @return Le DTO correspondant
      */
     TodoDTO toDTO(Todo todo);
 
     /**
-     * Converts a creation request to a Todo entity
+     * Convertit une requête de création en entité Todo
      *
-     * @param request The creation request
-     * @return The created Todo entity
+     * @param request La requête de création
+     * @return L'entité Todo créée
      */
     Todo toEntity(CreateTodoRequest request);
 
     /**
-     * Updates an existing Todo entity with data from an update request
-     * Null values in the request are ignored
+     * Met à jour une entité Todo existante avec les données d'une requête de mise à jour
+     * Les valeurs null dans la requête sont ignorées
      *
-     * @param request The request containing the new values
-     * @param todo The entity to update
+     * @param request La requête contenant les nouvelles valeurs
+     * @param todo L'entité à mettre à jour
      */
-    void updateEntityFromDTO(UpdateTodoRequest request, @MappingTarget Todo todo);
+    void updateEntityFromDTO(UpdateTodoRequest request, Todo todo);
 }

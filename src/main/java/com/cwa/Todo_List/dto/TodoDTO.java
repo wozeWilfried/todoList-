@@ -15,32 +15,33 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(description = "Todo Data Transfer Object")
+@Schema(description = "Todo Data Transfer Object - Represents a task in the system")
 public class TodoDTO {
-    @Schema(description = "Todo unique identifier", example = "1")
+
+    @Schema(description = "Unique identifier of the todo", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @NotBlank(message = "Title is required")
     @Size(min = 1, max = 200, message = "Title must be between 1 and 200 characters")
-    @Schema(description = "Todo title", example = "Complete project documentation", required = true)
+    @Schema(description = "Title of the todo task", example = "Complete project documentation", required = true, maxLength = 200)
     private String title;
 
     @Size(max = 1000, message = "Description must not exceed 1000 characters")
-    @Schema(description = "Todo description", example = "Write comprehensive documentation for the TodoList API")
+    @Schema(description = "Detailed description of the todo", example = "Write comprehensive documentation for the TodoList API including all endpoints", maxLength = 1000)
     private String description;
 
-    @Schema(description = "Completion status", example = "false")
+    @Schema(description = "Indicates whether the todo is completed", example = "false", defaultValue = "false")
     private Boolean completed;
 
-    @Schema(description = "Todo priority level", example = "HIGH")
+    @Schema(description = "Priority level of the todo", example = "HIGH", allowableValues = {"LOW", "MEDIUM", "HIGH", "URGENT"}, defaultValue = "MEDIUM")
     private Todo.Priority priority;
 
-    @Schema(description = "Due date for the todo", example = "2025-12-31T23:59:59")
+    @Schema(description = "Due date and time for completing the todo", example = "2025-12-31T23:59:59", type = "string", format = "date-time")
     private LocalDateTime dueDate;
 
-    @Schema(description = "Creation timestamp", example = "2025-11-16T10:30:00")
+    @Schema(description = "Timestamp when the todo was created", example = "2025-11-19T10:30:00", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime createdAt;
 
-    @Schema(description = "Last update timestamp", example = "2025-11-16T15:45:00")
+    @Schema(description = "Timestamp when the todo was last updated", example = "2025-11-19T15:45:00", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime updatedAt;
 }

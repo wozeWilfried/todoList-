@@ -190,3 +190,14 @@ LocalDateTime dueDate
 LocalDateTime createdAt
 LocalDateTime updatedAt
 }
+
+
+
+{
+"title": "Complete project documentation",
+"description": "Write comprehensive documentation for the TodoList API",
+"priority": "HIGH",
+"dueDate": "2025-12-31T23:59:59"
+}
+
+

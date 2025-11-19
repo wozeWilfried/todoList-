@@ -11,30 +11,25 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-/**
- * DTO pour la création d'une nouvelle tâche
- * Contient les données minimales nécessaires pour créer un Todo
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(description = "Requête pour créer une nouvelle tâche")
+@Schema(description = "Request object for creating a new todo task")
 public class CreateTodoRequest {
 
-    @NotBlank(message = "Le titre ne peut pas être vide")
-    @Size(min = 1, max = 200, message = "Le titre doit contenir entre 1 et 200 caractères")
-    @Schema(description = "Titre de la tâche", example = "Acheter du pain", required = true)
+    @NotBlank(message = "Title cannot be empty")
+    @Size(min = 1, max = 200, message = "Title must be between 1 and 200 characters")
+    @Schema(description = "Title of the task", example = "Buy groceries", required = true, maxLength = 200)
     private String title;
 
-    @Size(max = 1000, message = "La description ne peut pas dépasser 1000 caractères")
-    @Schema(description = "Description détaillée de la tâche", example = "Aller à la boulangerie avant 18h")
+    @Size(max = 1000, message = "Description cannot exceed 1000 characters")
+    @Schema(description = "Detailed description of the task", example = "Buy milk, eggs, bread, and fruits from the supermarket", maxLength = 1000)
     private String description;
 
-    @Schema(description = "Date et heure d'échéance de la tâche", example = "2025-12-31T23:59:59")
+    @Schema(description = "Due date and time for the task", example = "2025-11-30T18:00:00", type = "string", format = "date-time")
     private LocalDateTime dueDate;
 
-    @Schema(description = "Priorité de la tâche", example = "HIGH",
-            allowableValues = {"LOW", "MEDIUM", "HIGH", "URGENT"})
+    @Schema(description = "Priority level of the task", example = "HIGH", allowableValues = {"LOW", "MEDIUM", "HIGH", "URGENT"}, defaultValue = "MEDIUM")
     private Todo.Priority priority;
 }

@@ -14,22 +14,23 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Schema(description = "Request object for updating an existing Todo")
+@Schema(description = "Request object for updating an existing todo. All fields are optional.")
 public class UpdateTodoRequest {
+
     @Size(min = 1, max = 200, message = "Title must be between 1 and 200 characters")
-    @Schema(description = "Todo title", example = "Updated task title")
+    @Schema(description = "New title for the task", example = "Updated: Buy groceries and cook dinner", maxLength = 200)
     private String title;
 
     @Size(max = 1000, message = "Description must not exceed 1000 characters")
-    @Schema(description = "Todo description", example = "Updated description")
+    @Schema(description = "Updated description of the task", example = "Buy ingredients and prepare dinner for the family", maxLength = 1000)
     private String description;
 
-    @Schema(description = "Completion status", example = "true")
+    @Schema(description = "New completion status", example = "true")
     private Boolean completed;
 
-    @Schema(description = "Todo priority level", example = "URGENT")
+    @Schema(description = "Updated priority level", example = "URGENT", allowableValues = {"LOW", "MEDIUM", "HIGH", "URGENT"})
     private Todo.Priority priority;
 
-    @Schema(description = "Due date for the todo", example = "2025-12-31T23:59:59")
+    @Schema(description = "New due date and time", example = "2025-12-01T20:00:00", type = "string", format = "date-time")
     private LocalDateTime dueDate;
 }
